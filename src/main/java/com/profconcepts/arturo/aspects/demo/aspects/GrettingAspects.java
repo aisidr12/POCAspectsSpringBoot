@@ -2,6 +2,7 @@ package com.profconcepts.arturo.aspects.demo.aspects;
 
 import java.util.Arrays;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -19,6 +20,14 @@ public class GrettingAspects {
     String methodName = joinPoint.getSignature().getName();
     String arguments = Arrays.toString(joinPoint.getArgs());
     logger.info("Metodo invocado: " + methodName + " con argumentos: " + arguments);
+  }
+
+  @After("execution(* com.profconcepts.arturo.aspects.demo..*.*(..))")
+  public void afterGrettingAspect(JoinPoint joinPoint) {
+    logger.info("Entrando en afterGrettingAspect");
+    String methodName = joinPoint.getSignature().getName();
+    String arguments = Arrays.toString(joinPoint.getArgs());
+    logger.info("Metodo invocado Despues: " + methodName + " con argumentos: " + arguments);
   }
 
 }
