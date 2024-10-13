@@ -11,4 +11,9 @@ public class GrettingServiceImpl implements GrettingService {
     System.out.println(salut);
     return salut;
   }
+
+  @Override
+  public String sayHelloError(String person, String phrase) {
+     throw new RuntimeException("Error test AOP Throwing");
+  }
 }

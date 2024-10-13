@@ -1,8 +1,12 @@
 package com.profconcepts.arturo.aspects.demo.aspects;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -30,4 +34,20 @@ public class GrettingAspects {
     logger.info("Metodo invocado Despues: " + methodName + " con argumentos: " + arguments);
   }
 
+  @AfterReturning("execution(* com.profconcepts.arturo.aspects.demo.services.GrettingServiceImpl.sayHello(..))")
+  public void afterReturningGrettingAspect(JoinPoint joinPoint) {
+    logger.info("Entrando en afterReturningGrettingAspect");
+    String methodName = joinPoint.getSignature().getName();
+    String arguments = Arrays.toString(joinPoint.getArgs());
+    logger.info("Metodo invocado AfterReturning : " + methodName + " con argumentos: " + arguments);
+    logger.info(LocalDateTime.now().toString());
+  }
+
+  @AfterThrowing("execution(* com.profconcepts.arturo.aspects.demo..*.*(..))")
+  public void afterThrowingGrettingAspect(JoinPoint joinPoint) {
+    logger.info("Entrando en afterThrowingGrettingAspect");
+    String methodName = joinPoint.getSignature().getName();
+    String arguments = Arrays.toString(joinPoint.getArgs());
+    logger.info("Metodo invocado AfterThrowing: " + methodName + " con argumentos: " + arguments);
+  }
 }
