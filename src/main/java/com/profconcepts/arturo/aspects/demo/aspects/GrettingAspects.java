@@ -9,16 +9,24 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
+@Order(2)
 public class GrettingAspects {
+
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @Before("execution(* com.profconcepts.arturo.aspects.demo.services.GrettingServiceImpl.sayHello(..))")
+  @Pointcut("execution(* com.profconcepts.arturo.aspects.demo.services.GrettingServiceImpl.sayHello(..))")
+  private void greetingJoinPointCut() {
+  }
+
+  @Before("greetingJoinPointCut()")
   public void beforeGrettingAspect(JoinPoint joinPoint) {
     logger.info("Entrando en beforeGrettingAspect");
     String methodName = joinPoint.getSignature().getName();
