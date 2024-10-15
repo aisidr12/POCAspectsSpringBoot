@@ -1,6 +1,5 @@
 package com.profconcepts.arturo.aspects.demo.aspects;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import org.aspectj.lang.JoinPoint;
@@ -22,9 +21,6 @@ public class GrettingAspects {
 
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @Pointcut("execution(* com.profconcepts.arturo.aspects.demo.services.GrettingServiceImpl.sayHello(..))")
-  private void greetingJoinPointCut() {
-  }
 
   @Before("greetingJoinPointCut()")
   public void beforeGrettingAspect(JoinPoint joinPoint) {

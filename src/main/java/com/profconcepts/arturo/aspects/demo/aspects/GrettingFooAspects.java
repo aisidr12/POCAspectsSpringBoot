@@ -17,7 +17,7 @@ public class GrettingFooAspects {
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-  @Before("execution(* com.profconcepts.arturo.aspects.demo.services.GrettingServiceImpl.sayHello(..))")
+  @Before("grettingFooJoinPointCut()")
   private void loggerBefore(JoinPoint joinPoint){
     logger.info("Entrando en beforeGrettingAspect order 1");
     String methodName = joinPoint.getSignature().getName();
